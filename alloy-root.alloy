@@ -1,0 +1,10 @@
+logging {
+		format="logfmt"
+	}
+
+import.git "yeet" {
+	repository = "https://gitlab.corp.pingidentity.com/davidsmith/alloy-test"
+	revision = "main"
+	path = "test/alloy-dummy-node.alloy"
+	pull_frequency = "20s"
+	}
