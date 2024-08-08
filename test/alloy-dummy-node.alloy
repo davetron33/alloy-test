@@ -1,7 +1,3 @@
-logging {
-		format = logfmt
-	}
-
 local.file_match "filesystem_logs" {
 		path_targets = [{"__path__"="/var/log/*/*.log"}]
 	}
