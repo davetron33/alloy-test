@@ -1,18 +1,20 @@
-local.file_match "filesystem_logs" {
+declare "local_collector_test" {
+	local.file_match "filesystem_logs" {
 		path_targets = [{"__path__"="/var/log/*/*.log"}]
-	}
+			}
 
-loki.source.file "default" {
+	loki.source.file "default" {
 		targets = local.file_match.filesystem_logs.targets
 		forward_to = [loki.write.eks_loki.receiver]
 	}
 
-loki.write "eks_loki" {
-	endpoint {
-		url = "http://localhost:3100/loki/api/v1/push"
-	}
-	external_labels = {
-		agent = "alloy_remote",
-		environment="ping_v1",
+	loki.write "eks_loki" {
+		endpoint {
+			url = "http://localhost:3100/loki/api/v1/push"
+		}
+		external_labels = {
+			agent = "alloy_remote",
+			environment="ping_v1",
+		}
 	}
 }
